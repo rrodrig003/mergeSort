@@ -21,9 +21,12 @@ function merge(arr1, arr2) {
         }
     }
 
+    if (arr1.length > 0) resultArr.push(...arr1)
+    if (arr2.length > 0) resultArr.push(...arr2)
+
     console.log(resultArr);
 
     return resultArr;
 }
 
-merge([2,5,9],[1,7,8])
+merge([2,5,9],[1,7,8,10])
