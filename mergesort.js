@@ -1,9 +1,9 @@
-function split(wholeArr) {
+function split(arr) {
     let firstHalf, secondHalf;
 
-    firstHalf = wholeArr.slice(0, wholeArr.length/2)
+    firstHalf = arr.slice(0, arr.length/2)
     
-    secondHalf = wholeArr.slice(wholeArr.length/2)
+    secondHalf = arr.slice(arr.length/2)
 
     return [firstHalf, secondHalf];
 }
@@ -11,7 +11,8 @@ function split(wholeArr) {
 function merge(arr1, arr2) {
     let resultArr = [];
 
-    while (arr1.length > 0 && arr2.length > 0) {
+    //sort arrays
+    while (arr1.length && arr2.length) {
         if (arr1[0] > arr2[0]) {
             resultArr.push(arr2[0])
             arr2.shift();
@@ -21,12 +22,25 @@ function merge(arr1, arr2) {
         }
     }
 
+    //push any remaining elements into combined array
     if (arr1.length > 0) resultArr.push(...arr1)
     if (arr2.length > 0) resultArr.push(...arr2)
-
-    console.log(resultArr);
 
     return resultArr;
 }
 
-merge([2,5,9],[1,7,8,10])
+function mergeSort(list){
+
+    //first base case to get n arrays per n elements
+    if (list.length === 1) return list;
+
+    //initial split
+    let [a, b] = split(list);
+
+    //recursively split until base case is reached 
+    let list1 = mergeSort(a)
+    let list2 = mergeSort(b)
+
+    //once lists from recursions above are returned, merge    
+    return merge(list1, list2);
+}
